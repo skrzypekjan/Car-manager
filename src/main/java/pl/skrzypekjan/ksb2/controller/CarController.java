@@ -54,16 +54,16 @@ public class CarController {
     public ResponseEntity addNewCar(@Validated @RequestBody Car car){
         boolean isAdded = carService.addCar(car);
         if (isAdded) {
-            return new ResponseEntity<>("New Car was added", HttpStatus.CREATED);
+            return new ResponseEntity<>(car, HttpStatus.CREATED);
         }
         return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
     }
 
     @PutMapping()
     public ResponseEntity modifyCar(@Validated @RequestBody Car car) {
-        Optional<Car> modifyCar = carService.modifyCar(car);
-        if (modifyCar.isPresent()) {
-            return new ResponseEntity<>("Modification Car: " + modifyCar.get().getId(), HttpStatus.OK);
+        boolean modifyCar = carService.modifyCar(car);
+        if (modifyCar) {
+            return new ResponseEntity<>(car, HttpStatus.OK);
         }
         return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
@@ -72,7 +72,7 @@ public class CarController {
     public ResponseEntity modifyColorCarById(@Validated @RequestBody Car car) {
         boolean result  = carService.modifyColorCarById(car);
         if(result) {
-            return new ResponseEntity("Modify to color " + car.getColor() ,HttpStatus.OK);
+            return new ResponseEntity(car ,HttpStatus.OK);
         }
         return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
@@ -81,7 +81,7 @@ public class CarController {
     public ResponseEntity removeCar(@Validated @PathVariable long id) {
         Optional<Car> delCar = carService.removeCarById(id);
         if (delCar.isPresent()) {
-            return new ResponseEntity("Car nr " + delCar.get().getId() + " was remove", HttpStatus.OK);
+            return new ResponseEntity(delCar.get(), HttpStatus.OK);
         }
         return new ResponseEntity(HttpStatus.NOT_FOUND);
     }

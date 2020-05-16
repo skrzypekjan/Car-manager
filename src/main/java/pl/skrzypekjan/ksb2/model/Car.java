@@ -5,7 +5,6 @@ import javax.validation.constraints.Size;
 
 public class Car{
 
-    @NotNull
     private long id;
     @NotNull
     @Size(min = 2)

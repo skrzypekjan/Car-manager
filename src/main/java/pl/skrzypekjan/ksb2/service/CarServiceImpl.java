@@ -44,20 +44,23 @@ public class CarServiceImpl implements CarService {
     }
 
     @Override
-    public Optional<Car> modifyCar(Car car) {
-        Optional<Car> modifyCar = carList.stream().filter(carId -> carId.getId() == car.getId()).findFirst();
+    public boolean modifyCar(Car newCar) {
+        Optional<Car> modifyCar = findCarById(newCar.getId());
         if (modifyCar.isPresent()) {
-            carList.remove(modifyCar.get());
-            carList.add(car);
+            Car car = modifyCar.get();
+            car.setMark(newCar.getMark());
+            car.setModel(newCar.getModel());
+            car.setColor(newCar.getColor());
+            return true;
         }
-        return modifyCar;
+        return false;
     }
 
     @Override
     public boolean modifyColorCarById(Car newCar) {
         Optional<Car> car = carList.stream().filter(Car -> Car.getId() == newCar.getId()).findFirst();
         if (car.isPresent()) {
-            if (newCar.getMark() != null) {
+            if (newCar.getColor() != null) {
                 car.get().setColor(newCar.getColor());
             }
             return true;

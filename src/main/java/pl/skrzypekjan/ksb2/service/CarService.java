@@ -14,7 +14,7 @@ public interface CarService {
 
     boolean addCar(Car car);
 
-    Optional<Car> modifyCar(Car car);
+    boolean modifyCar(Car car);
 
     boolean modifyColorCarById(Car car);
 
