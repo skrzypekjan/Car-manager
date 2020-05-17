@@ -13,6 +13,7 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
+@CrossOrigin
 @RequestMapping(value = "/cars", produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
 public class CarController {
 
@@ -59,13 +60,13 @@ public class CarController {
         return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
     }
 
-    @PutMapping()
-    public ResponseEntity modifyCar(@Validated @RequestBody Car car) {
-        boolean modifyCar = carService.modifyCar(car);
-        if (modifyCar) {
-            return new ResponseEntity<>(car, HttpStatus.OK);
+    @PutMapping("/{id}")
+    public ResponseEntity updateCar(@PathVariable long id, @RequestBody Car car){
+        boolean newCar = carService.updateCar(id, car);
+        if (newCar){
+            return new ResponseEntity(car, HttpStatus.OK);
         }
-        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        return new ResponseEntity(HttpStatus.NOT_FOUND);
     }
 
     @PatchMapping()

@@ -1,6 +1,8 @@
 package pl.skrzypekjan.ksb2.service;
+
 import pl.skrzypekjan.ksb2.model.Car;
 import pl.skrzypekjan.ksb2.model.Color;
+
 import java.util.List;
 import java.util.Optional;
 
@@ -14,7 +16,7 @@ public interface CarService {
 
     boolean addCar(Car car);
 
-    boolean modifyCar(Car car);
+    boolean updateCar(long id, Car car);
 
     boolean modifyColorCarById(Car car);
 
