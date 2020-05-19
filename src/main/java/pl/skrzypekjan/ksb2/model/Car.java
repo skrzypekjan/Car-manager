@@ -1,5 +1,5 @@
 package pl.skrzypekjan.ksb2.model;
-
+import static pl.skrzypekjan.ksb2.service.CarServiceImpl.count;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
@@ -15,11 +15,12 @@ public class Car{
     @NotNull
     private Color color;
 
-    public Car(long id, String mark, String model, Color color) {
-        this.id = id;
+    public Car(String mark, String model, Color color) {
+        this.id = count;
         this.mark = mark;
         this.model = model;
         this.color = color;
+        count++;
     }
 
     public Car() {

@@ -12,15 +12,16 @@ import java.util.stream.Collectors;
 @Service
 public class CarServiceImpl implements CarService {
 
+    public static long count = 1;
     private List<Car> carList;
 
     public CarServiceImpl() {
         carList = new ArrayList<>();
-        carList.add(new Car(1L, "Mercedes", "W123", Color.BLACK));
-        carList.add(new Car(2L, "Volkswagen", "Golf Plus", Color.RED));
-        carList.add(new Car(3L, "Honda", "CR-V", Color.RED));
-        carList.add(new Car(4L, "Fiat", "Tipo", Color.RED));
-        carList.add(new Car(5L, "Ford", "Mondeo", Color.WHITE));
+        carList.add(new Car("Mercedes", "W123", Color.BLACK));
+        carList.add(new Car("Volkswagen", "Golf Plus", Color.RED));
+        carList.add(new Car("Honda", "CR-V", Color.RED));
+        carList.add(new Car("Fiat", "Tipo", Color.RED));
+        carList.add(new Car("Ford", "Mondeo", Color.WHITE));
     }
 
     @Override
@@ -39,8 +40,10 @@ public class CarServiceImpl implements CarService {
     }
 
     @Override
-    public boolean addCar(Car car) {
-        return carList.add(car);
+    public boolean addCar(Car newCar) {
+        newCar.setId(count);
+        count++;
+        return carList.add(newCar);
     }
 
     @Override
