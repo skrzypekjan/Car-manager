@@ -1,5 +1,8 @@
 package pl.skrzypekjan.ksb2.service;
 
+import org.springframework.boot.context.event.ApplicationReadyEvent;
+import org.springframework.boot.context.event.ApplicationStartedEvent;
+import org.springframework.context.event.EventListener;
 import org.springframework.stereotype.Service;
 import pl.skrzypekjan.ksb2.model.Car;
 import pl.skrzypekjan.ksb2.model.Color;
@@ -15,8 +18,13 @@ public class CarServiceImpl implements CarService {
     public static long count = 1;
     private List<Car> carList;
 
+
     public CarServiceImpl() {
         carList = new ArrayList<>();
+    }
+
+    @EventListener(ApplicationReadyEvent.class)
+    public void addCars(){
         carList.add(new Car("Mercedes", "W123", Color.BLACK));
         carList.add(new Car("Volkswagen", "Golf Plus", Color.RED));
         carList.add(new Car("Honda", "CR-V", Color.RED));
